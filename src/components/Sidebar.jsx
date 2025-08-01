@@ -6,6 +6,7 @@ import Navbar from "./Navbar.jsx";
 import { setSelectedCategory } from "../redux/categorySlice.jsx";
 import Menu from "../assets/Menu.jsx";
 import logo from "../assets/ytLogo.png";
+import logoDark from "../assets/ytLogo-dark.png";
 import { Link } from "react-router-dom";
 import { setSidebarExtendedValue } from "../redux/categorySlice.jsx";
 
@@ -26,6 +27,7 @@ function Sidebar() {
         className={`absolute w-[10%] bg-[#fff] top-20 hidden sm:block ${
           darkMode && "text-white"
         }`}
+        style={{ backgroundColor: darkMode ? "#131417" : "#fff" }}
       >
         <div className="flex flex-col gap-y-6 fixed z-20">
           {categories.map((e) => {
@@ -52,8 +54,7 @@ function Sidebar() {
                           : darkMode
                           ? "#131417"
                           : "#fff",
-                      borderRadius:
-                        selectedCategory === e.name ? "10px" : "0px",
+                      borderRadius: selectedCategory === e.name ? "10px" : "0px",
                     }}
                     className="flex items-center gap-x-4 ml-2 px-2 py-2"
                   >
@@ -87,8 +88,7 @@ function Sidebar() {
                           : darkMode
                           ? "#131417"
                           : "#fff",
-                      borderRadius:
-                        selectedCategory === e.name ? "10px" : "0px",
+                      borderRadius: selectedCategory === e.name ? "10px" : "0px",
                     }}
                     className="flex items-center gap-x-4 ml-2 px-2 py-2"
                   >
@@ -116,7 +116,11 @@ function Sidebar() {
             <Menu />
           </button>
           <Link to="/">
-            <img className="w-32" src={logo} alt="YouTube Logo" />
+            <img 
+              className="w-32" 
+              src={darkMode ? logoDark : logo} 
+              alt="YouTube Logo" 
+            />
           </Link>
         </div>
         <div className="flex flex-col gap-y-6">
@@ -146,8 +150,7 @@ function Sidebar() {
                           : darkMode
                           ? "#131417"
                           : "#fff",
-                      borderRadius:
-                        selectedCategory === e.name ? "10px" : "0px",
+                      borderRadius: selectedCategory === e.name ? "10px" : "0px",
                     }}
                     className="flex items-center gap-x-4 ml-2 px-2 py-2"
                   >

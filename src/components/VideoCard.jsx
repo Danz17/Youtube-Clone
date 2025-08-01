@@ -6,38 +6,45 @@ function VideoCard(props) {
   const pageRoute = useNavigate();
   const { darkMode } = useSelector((state) => state.darkMode);
 
+  if (!props.thumbnail || !props.title) {
+    return null;
+  }
+
   return (
-    <div
-      style={{ width: props.width, display: props.display }}
+    <div 
+      style={{ width: props.width, display: props.display }} 
       className="w-[100%] sm:w-[90%] md:w-[100%] relative cursor-pointer videoComponent"
     >
-      <img
+      <img 
         onClick={() => pageRoute(`/watch/${props.videoId}`)}
-        className="md:w-56 lg:w-72 rounded-[12px] videoImage w-full h-48 object-cover"
-        src={props.thumbnail}
+        className="md:w-56 lg:w-72 rounded-[12px] videoImage w-full h-48 object-cover" 
+        src={props.thumbnail} 
         alt={props.title}
+        onError={(e) => {
+          e.target.style.display = 'none';
+        }}
       />
-      <div
-        style={{ width: props.rightWidth }}
+      <div 
+        style={{ width: props.rightWidth }} 
         className="flex w-[100%] gap-x-3 items-start mt-2"
       >
         <div>
-          <h3
+          <h3 
             onClick={() => pageRoute(`/watch/${props.videoId}`)}
             className={`text-[14px] lg:text-[16px] font-semibold leading-[20px] w-[94%] ${
-              darkMode && "text-black"
+              darkMode ? "text-white" : "text-black"
             }`}
           >
             {props.title?.slice(0, 60)}
           </h3>
           <div className="mt-1">
-            <p
+            <p 
               onClick={() => pageRoute(`/channel/${props.channelId}`)}
               className="text-[11.5px] text-[#606060] lg:text-[13.5px] font-[500] tracking-wide"
             >
               {props.channel}
             </p>
-            <p
+            <p 
               onClick={() => pageRoute(`/watch/${props.videoId}`)}
               className="text-[11.5px] text-[#606060] lg:text-[13.5px] font-medium tracking-wider -mt-1"
             >

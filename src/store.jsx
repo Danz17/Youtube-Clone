@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import categorySlice from "./redux/categorySlice";
-import channelSlice from "./redux/channelSlice";
-import searchSlice from "./redux/searchSlice";
-import videoSlice from "./redux/videoSlice";
-import darkModeSlice from "./redux/darkModeSlice";
+import categorySlice from "./redux/categorySlice.jsx";
+import channelSlice from "./redux/channelSlice.jsx";
+import searchSlice from "./redux/searchSlice.jsx";
+import videoSlice from "./redux/videoSlice.jsx";
+import darkModeSlice from "./redux/darkModeSlice.jsx";
 
 const store = configureStore({
   reducer: {
