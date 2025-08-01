@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setDarkMode } from "../redux/darkModeSlice";
+import { setDarkMode } from "../redux/darkModeSlice.jsx";
 
 function DarkModeButton() {
   const dispatch = useDispatch();

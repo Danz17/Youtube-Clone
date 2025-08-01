@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import categories from "../utils/categories";
-import Navbar from "./Navbar";
-import { setSelectedCategory } from "../redux/categorySlice";
-import Menu from "../assets/Menu";
+import categories from "../utils/categories.jsx";
+import Navbar from "./Navbar.jsx";
+import { setSelectedCategory } from "../redux/categorySlice.jsx";
+import Menu from "../assets/Menu.jsx";
 import logo from "../assets/ytLogo.png";
 import { Link } from "react-router-dom";
-import { setSidebarExtendedValue } from "../redux/categorySlice";
+import { setSidebarExtendedValue } from "../redux/categorySlice.jsx";
+
 function Sidebar() {
   const pageRoute = useNavigate();
   const dispatch = useDispatch();
   const { selectedCategory } = useSelector((state) => state.category);
   const [sidebarExtended, setSidebarExtended] = useState(false);
   const { darkMode } = useSelector((state) => state.darkMode);
-  // const { sidebarExtended } = useSelector((state) => state.category)
+
   return (
     <>
       <Navbar
@@ -57,7 +58,6 @@ function Sidebar() {
                     className="flex items-center gap-x-4 ml-2 px-2 py-2"
                   >
                     {selectedCategory === e.name ? e.active : e.icon}
-
                     <h4 className="text-md font-semibold tracking-wide">
                       {e.name}
                     </h4>
@@ -97,12 +97,10 @@ function Sidebar() {
                 </button>
               );
             }
-
-            //
           })}
         </div>
       </div>
-      <div className=" block sm:hidden bg-[#ffff] top-0 fixed z-10 transition ease-in-out delay-150 h-[100vh]">
+      <div className="block sm:hidden bg-[#ffff] top-0 fixed z-10 transition ease-in-out delay-150 h-[100vh]">
         <div
           className={`${
             sidebarExtended ? "block" : "hidden"
@@ -118,10 +116,10 @@ function Sidebar() {
             <Menu />
           </button>
           <Link to="/">
-            <img className="w-32" src={logo} alt="" />
+            <img className="w-32" src={logo} alt="YouTube Logo" />
           </Link>
         </div>
-        <div className=" flex flex-col gap-y-6">
+        <div className="flex flex-col gap-y-6">
           {categories.map((e) => {
             if (sidebarExtended) {
               return (
@@ -132,7 +130,6 @@ function Sidebar() {
                       dispatch(setSidebarExtendedValue(false));
                       setSidebarExtended(false);
                     }
-
                     if (e.name === "Home") {
                       pageRoute(`/`);
                     } else {
@@ -155,7 +152,6 @@ function Sidebar() {
                     className="flex items-center gap-x-4 ml-2 px-2 py-2"
                   >
                     {selectedCategory === e.name ? e.active : e.icon}
-
                     <h4 className="text-md font-semibold tracking-wide">
                       {e.name}
                     </h4>
@@ -163,6 +159,7 @@ function Sidebar() {
                 </button>
               );
             }
+            return null;
           })}
         </div>
       </div>

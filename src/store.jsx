@@ -4,6 +4,7 @@ import channelSlice from "./redux/channelSlice";
 import searchSlice from "./redux/searchSlice";
 import videoSlice from "./redux/videoSlice";
 import darkModeSlice from "./redux/darkModeSlice";
+
 const store = configureStore({
   reducer: {
     category: categorySlice,
@@ -13,4 +14,5 @@ const store = configureStore({
     darkMode: darkModeSlice,
   },
 });
+
 export default store;

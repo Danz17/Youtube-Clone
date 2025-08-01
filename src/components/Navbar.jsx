@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import Menu from "../assets/Menu";
+import Menu from "../assets/Menu.jsx";
 import logo from "../assets/ytLogo.png";
 import logoDark from "../assets/ytLogo-dark.png";
-
 import { Link } from "react-router-dom";
-import { setSidebarExtendedValue } from "../redux/categorySlice";
+import { setSidebarExtendedValue } from "../redux/categorySlice.jsx";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Stack from "@mui/material/Stack";
 import LinearProgress from "@mui/material/LinearProgress";
-import DarkModeButton from "./DarkModeButton";
+import DarkModeButton from "./DarkModeButton.jsx";
 
 function Navbar({ sidebarExtended, setSidebarExtended }) {
   const dispatch = useDispatch();
@@ -23,8 +22,9 @@ function Navbar({ sidebarExtended, setSidebarExtended }) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    pageRoute(`/search/${searchValue}`);
-    e.target.value = " ";
+    if (searchValue.trim()) {
+      pageRoute(`/search/${searchValue}`);
+    }
   };
 
   return (
@@ -38,9 +38,7 @@ function Navbar({ sidebarExtended, setSidebarExtended }) {
           <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
             <LinearProgress color="error" />
           </Stack>
-        ) : (
-          ""
-        )}
+        ) : null}
 
         <nav className="flex justify-between">
           <div className="flex h-[60px] items-center space-x-2 lg:space-x-20 xl:space-x-64">
@@ -54,21 +52,16 @@ function Navbar({ sidebarExtended, setSidebarExtended }) {
               >
                 <Menu />
               </button>
-              {/* <button className='block sm:hidden' onClick={() => {
-          }}>
-          <Menu />
-          
-        </button> */}
               <Link to="/">
                 {darkMode ? (
-                  <img className="w-24 ml-4" src={logoDark} alt="" />
+                  <img className="w-24 ml-4" src={logoDark} alt="YouTube Logo" />
                 ) : (
-                  <img className="w-32" src={logo} alt="" />
+                  <img className="w-32" src={logo} alt="YouTube Logo" />
                 )}
               </Link>
             </div>
             <form onSubmit={handleOnSubmit} className="-mt-3">
-              <div className="relative w-[170px] sm:w-[420px] ">
+              <div className="relative w-[170px] sm:w-[420px]">
                 <input
                   onChange={(e) => setSearchValue(e.target.value)}
                   type="search"
@@ -78,6 +71,7 @@ function Navbar({ sidebarExtended, setSidebarExtended }) {
                     darkMode ? "bg-dark" : "bg-gray-50"
                   } rounded-lg border-[1px] border-[#cccccc] focus:outline-none`}
                   placeholder="Search"
+                  value={searchValue}
                   required
                 />
                 <button
@@ -86,7 +80,6 @@ function Navbar({ sidebarExtended, setSidebarExtended }) {
                     darkMode ? "bg-dark" : "bg-[#f8f8f8]"
                   } border-[1px] border-[#cccccc]`}
                 >
-                  {" "}
                   <svg
                     className="w-5 h-5 text-gray-500 dark:text-gray-400"
                     fill="none"
@@ -105,7 +98,6 @@ function Navbar({ sidebarExtended, setSidebarExtended }) {
               </div>
             </form>
           </div>
-
           <DarkModeButton />
         </nav>
       </div>

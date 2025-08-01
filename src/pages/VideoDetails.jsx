@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getVideoDetails, getRelatedVideos } from "../redux/videoSlice";
+import { getVideoDetails, getRelatedVideos } from "../redux/videoSlice.jsx";
 import ReactPlayer from "react-player";
 import { FiThumbsUp } from "react-icons/fi";
-import timeSince from "../utils/date";
-import convertToInternationalCurrencySystem from "../utils/convert";
+import timeSince from "../utils/date.jsx";
+import convertToInternationalCurrencySystem from "../utils/convert.jsx";
+
 const Video = (props) => {
   const pageRoute = useNavigate();
   return (
@@ -19,7 +20,7 @@ const Video = (props) => {
       <div>
         <h3
           onClick={() => pageRoute(`/watch/${props.videoId}`)}
-          className="text-[15px] md:text-[16px] lg:text-[18px] font-medium tracking-wide text-[#000000]  md:leading-[24px] w-[100%] sm:w-[110%]"
+          className="text-[15px] md:text-[16px] lg:text-[18px] font-medium tracking-wide text-[#000000] md:leading-[24px] w-[100%] sm:w-[110%]"
         >
           {props.title}
         </h3>
@@ -38,6 +39,7 @@ const Video = (props) => {
     </div>
   );
 };
+
 function VideoDetails() {
   const { sidebarExtend } = useSelector((state) => state.category);
   const dispatch = useDispatch();
@@ -45,8 +47,9 @@ function VideoDetails() {
   const { videoDetails } = useSelector((state) => state.video);
   const { relatedVideos } = useSelector((state) => state.video);
   const { darkMode } = useSelector((state) => state.darkMode);
-  var aDay = 24 * 60 * 60 * 1000;
+  const aDay = 24 * 60 * 60 * 1000;
   const pageRoute = useNavigate();
+
   useEffect(() => {
     dispatch(getVideoDetails(`videos?part=snippet,statistics&id=${id}`));
     dispatch(
@@ -63,7 +66,7 @@ function VideoDetails() {
       ></div>
 
       <div
-        className={`pl-0  ${
+        className={`pl-0 ${
           sidebarExtend ? "sm:pl-[180px]" : "sm:pl-[70px]"
         } pt-20 ml-4 lg:flex lg:gap-x-7`}
       >
@@ -80,9 +83,10 @@ function VideoDetails() {
               {videoDetails?.snippet?.tags?.map((e, index) => {
                 return (
                   <a
+                    key={index}
                     style={{ display: index > 3 ? "none" : "" }}
                     className="text-[#3366CC] text-[13px] font-normal"
-                    href={`${e}`}
+                    href={`#${e}`}
                   >
                     {e?.slice(0, 15)}
                   </a>
@@ -90,16 +94,13 @@ function VideoDetails() {
               })}
             </div>
             <h2
-              className={`text-md sm:text-xl md:text-2xl text-[#000000] font-medium
-                ${darkMode && "text-white"}
-              `}
+              className={`text-md sm:text-xl md:text-2xl text-[#000000] font-medium ${
+                darkMode && "text-white"
+              }`}
             >
               {videoDetails?.snippet?.title}
             </h2>
             <div className="sm:flex items-center justify-between mt-3 space-y-3">
-              {/* <img className='rounded-[20px]' src="https://yt3.ggpht.com/wg1TITEoPfxvBGfzuqWyt3bqm_qu35ZhMswUv3feetU3xNX_6wsAXZF40OlPIgY4TmqbqCmAZ1U=s48-c-k-c0x00ffffff-no-rj" /> */}
-              {/* <div className='flex flex-col -gap-y-6'> */}
-
               <h5
                 onClick={() =>
                   pageRoute(`/channel/${videoDetails?.snippet?.channelId}`)
@@ -111,19 +112,17 @@ function VideoDetails() {
                 {videoDetails?.snippet?.channelTitle}
               </h5>
 
-              {/* </div> */}
-
               <div className="flex items-center gap-x-3 mb-5 sm:mb-0">
                 <div
-                  className={`flex items-center bg-[#f2f2f2] px-3 py-2 rounded-[10px]
-                  ${darkMode && "bg-dark"}
-                  `}
+                  className={`flex items-center bg-[#f2f2f2] px-3 py-2 rounded-[10px] ${
+                    darkMode && "bg-dark"
+                  }`}
                 >
                   <FiThumbsUp className="w-10 h-6" />
                   <span
-                    className={`text-[12.4px] sm:text-[14.4px] text-[#0f0f0f] font-medium tracking-wide
-                  ${darkMode && "text-white"}
-                    `}
+                    className={`text-[12.4px] sm:text-[14.4px] text-[#0f0f0f] font-medium tracking-wide ${
+                      darkMode && "text-white"
+                    }`}
                   >
                     {convertToInternationalCurrencySystem(
                       videoDetails?.statistics?.likeCount
@@ -131,9 +130,9 @@ function VideoDetails() {
                   </span>
                 </div>
                 <span
-                  className={`text-[12.4px] sm:text-[14.4px] text-[#0f0f0f] font-medium tracking-wide bg-[#f2f2f2] px-3 py-2 rounded-[10px]
-                    ${darkMode && "bg-dark text-white"}
-                  `}
+                  className={`text-[12.4px] sm:text-[14.4px] text-[#0f0f0f] font-medium tracking-wide bg-[#f2f2f2] px-3 py-2 rounded-[10px] ${
+                    darkMode && "bg-dark text-white"
+                  }`}
                 >
                   {convertToInternationalCurrencySystem(
                     videoDetails?.statistics?.viewCount
@@ -150,13 +149,13 @@ function VideoDetails() {
                 key={index + 2}
                 thumbnail={e.snippet?.thumbnails?.medium?.url}
                 width="210px"
-                title={e.snippet.title}
-                channel={e.snippet.channelTitle}
+                title={e.snippet?.title}
+                channel={e.snippet?.channelTitle}
                 on={timeSince(
-                  new Date(Date.parse(e.snippet.publishedAt) - aDay)
+                  new Date(Date.parse(e.snippet?.publishedAt) - aDay)
                 )}
-                channelId={e.snippet.channelId}
-                videoId={e.id.videoId}
+                channelId={e.snippet?.channelId}
+                videoId={e.id?.videoId}
               />
             );
           })}

@@ -22,6 +22,7 @@ function timeSince(date) {
   if (interval > 1) {
     return Math.floor(interval) + " minute ago";
   }
-  return Math.floor(seconds) + " seconda ago";
+  return Math.floor(seconds) + " seconds ago";
 }
+
 export default timeSince;

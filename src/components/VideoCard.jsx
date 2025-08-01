@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../pages/feed.css";
 import { useSelector } from "react-redux";
 
 function VideoCard(props) {
   const pageRoute = useNavigate();
   const { darkMode } = useSelector((state) => state.darkMode);
+
   return (
     <div
       style={{ width: props.width, display: props.display }}
@@ -13,8 +13,9 @@ function VideoCard(props) {
     >
       <img
         onClick={() => pageRoute(`/watch/${props.videoId}`)}
-        className="md:w-56 lg:w-72 rounded-[12px] videoImage"
+        className="md:w-56 lg:w-72 rounded-[12px] videoImage w-full h-48 object-cover"
         src={props.thumbnail}
+        alt={props.title}
       />
       <div
         style={{ width: props.rightWidth }}

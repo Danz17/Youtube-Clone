@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { options } from "../utils/Fetch.js";
+import { options } from "../utils/Fetch.jsx";
 import axios from "axios";
 
 const base_url = "https://youtube-v31.p.rapidapi.com";

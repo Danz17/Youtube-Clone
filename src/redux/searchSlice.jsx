@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { options } from "../utils/Fetch.js";
+import { options } from "../utils/Fetch.jsx";
 
 const initialState = {
   searchResults: [],
