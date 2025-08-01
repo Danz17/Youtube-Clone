@@ -30,9 +30,11 @@ function Feed() {
 
   if (isLoading) {
     return (
-      <div className={`pl-0 ${
-        sidebarExtend ? "sm:pl-[180px]" : "sm:pl-[70px]"
-      } pt-20 flex justify-center items-center h-screen`}>
+      <div
+        className={`pl-0 ${
+          sidebarExtend ? "sm:pl-[180px]" : "sm:pl-[70px]"
+        } pt-20 flex justify-center items-center h-screen`}
+      >
         <div className={`text-xl ${darkMode ? "text-white" : "text-black"}`}>
           Loading...
         </div>
